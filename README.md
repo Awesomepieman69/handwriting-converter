@@ -26,7 +26,7 @@ A simple web application that converts typed text to handwritten style and gener
 
 No installation required. Simply open the `index.html` file in a web browser.
 
-## Font Requirements
+## Font Requirements(not required)
 
 This project uses the 'Gloria Hallelujah' font. You need to:
 
