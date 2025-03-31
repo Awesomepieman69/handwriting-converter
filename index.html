@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handwriting Converter</title>
+    <style>
+        @font-face {
+            font-family: 'Gloria Hallelujah';
+            src: url('Gloria_Hallelujah/GloriaHallelujah-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        
+        .input-area {
+            margin-bottom: 20px;
+        }
+        
+        textarea {
+            width: 21cm; /* Strict A4 width */
+            min-height: 150px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px; /* Initial font size */
+            resize: vertical;
+            font-family: 'Gloria Hallelujah', cursive;
+            line-height: 1.85;
+            box-sizing: border-box;
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+
+        /* Style for the PDF generation button */
+        .controls {
+             display: flex;
+             gap: 10px;
+             margin-top: 20px; /* Add some space above the button */
+             justify-content: center; /* Center the button */
+         }
+         
+         button {
+             padding: 10px 15px;
+             background-color: #4CAF50;
+             color: white;
+             border: none;
+             border-radius: 4px;
+             cursor: pointer;
+             font-size: 16px;
+         }
+         
+         button:hover {
+             background-color: #45a049;
+         }
+
+        /* Style for the hidden rendering target */
+        #renderTarget {
+            /* Mirror textarea styles */
+            width: 21cm; 
+            padding: 8px;
+            font-size: 16px; 
+            font-family: 'Gloria Hallelujah', cursive;
+            line-height: 1.85;
+            box-sizing: border-box;
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            background-color: white;
+            min-height: 1px; /* Needs some height */
+
+            /* Hide it */
+            position: absolute;
+            left: -9999px;
+            top: auto;
+        }
+        
+        /* Added: Preview container styling */
+        .preview-container {
+            margin-top: 30px;
+            display: none; /* Hidden initially */
+        }
+        
+        .preview-page {
+            width: 21cm;
+            min-height: 200px; /* Start with a minimum height */
+            margin: 0 auto 30px; /* Space between pages */
+            padding: 8px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            font-family: 'Gloria Hallelujah', cursive;
+            font-size: 16px;
+            line-height: 1.85;
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            background-color: white;
+            position: relative;
+        }
+        
+        .page-indicator {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4CAF50;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-family: Arial, sans-serif; /* Normal font */
+        }
+        
+        /* Added: Button to toggle preview */
+        #previewBtn {
+            background-color: #2196F3;
+        }
+        
+        #previewBtn:hover {
+            background-color: #0b7dda;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Handwriting Input</h1>
+        
+        <div class="input-area">
+            <textarea id="textInput" placeholder="Type your text here..."></textarea>
+        </div>
+
+        <div class="controls">
+            <button id="previewBtn">Preview</button>
+            <button id="generatePdfBtn">Generate PDF</button>
+        </div>
+        
+        <!-- Added: Preview container with pages -->
+        <div class="preview-container" id="previewContainer">
+            <h2>Preview with Page Breaks</h2>
+            <!-- Preview pages will be added dynamically -->
+        </div>
+    </div>
+
+    <!-- Hidden div for rendering before PDF generation -->
+    <div id="renderTarget"></div> 
+    
+    <!-- Add libraries back -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="script.js"></script> 
+</body>
+</html>
